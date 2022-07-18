@@ -1,0 +1,54 @@
+
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct arvore{
+    char info;
+    struct arvore *esq;
+    struct arvore *dir;
+}Arvore;
+
+Arvore *criarArvoreVazia(){
+    return NULL;
+}
+
+Arvore *criarArvore(char c , Arvore *sae ,Arvore *sad){
+    Arvore* novo = (Arvore*)malloc(sizeof(Arvore));
+    if(novo != NULL){
+        novo->info =  c;
+        novo->esq = sae;
+        novo->dir = sad;
+        return novo;
+    }else{
+        printf("ESPAÇO NÃO ALOCADO");
+    }
+}
+
+void imprime(Arvore *a){
+    if(!estaVazia()){
+        printf("%c",a->info);
+        imprime(a->esq);
+        imprime(a->dir);
+    }
+}
+
+int estaVazia(Arvore *arv){
+    return(arv == NULL);
+}
+
+int main(int argc, char** argv) {
+    Arvore *arv = criarArvoreVazia();
+    Arvore *a_d = criarArvore('d',criarArvoreVazia(),criarArvoreVazia());
+    Arvore *a_b = criarArvore('b',criarArvoreVazia(),a_d);
+    Arvore *a_e = criarArvore('e',criarArvoreVazia(),criarArvoreVazia());
+    Arvore *a_f = criarArvore('f',criarArvoreVazia(),criarArvoreVazia());
+    Arvore *a_c = criarArvore('c',a_e,a_f);
+    Arvore *a_a = criarArvore('a',a_b,a_c);
+    
+    imprime(a_a);
+    
+    
+    
+    return (EXIT_SUCCESS);
+}
+
